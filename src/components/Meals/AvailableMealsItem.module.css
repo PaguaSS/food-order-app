@@ -1,0 +1,20 @@
+.meals-item {
+    display: grid;
+    grid-template-columns: 80% 20%;
+    padding: 14px;
+    border-bottom: 1px solid rgb(187, 187, 187);
+}
+
+.meals-item:last-child {
+    border-bottom: none;
+}
+
+.meals-item-desc {
+    font-style: italic;
+}
+
+.meals-item-price {
+    color: #b13505;
+    font-weight: bold;
+    font-size: 20px;
+}

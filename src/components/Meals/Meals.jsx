@@ -1,6 +1,7 @@
 import { Fragment } from "react";
 import MealsSummary from "./MealsSummary";
 import AvailableMeals from "./AvailableMeals";
+import CartSummary from "../Cart/CartSummary";
 
 const Meals = () => {
     return (
@@ -8,6 +9,7 @@ const Meals = () => {
             <main>
                 <MealsSummary/>
                 <AvailableMeals/>
+                <CartSummary/>
             </main>
         </Fragment>
     );

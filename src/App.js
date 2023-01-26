@@ -1,12 +1,15 @@
 import { Fragment } from "react";
 import Header from "./components/Layout/Header/Header";
 import Meals from "./components/Meals/Meals";
+import { CartSummaryProvider } from "./components/Providers/cart-summary-context";
 
 const App = () => {
   return (
     <Fragment>
-      <Header/>
-      <Meals/>
+      <CartSummaryProvider>
+        <Header/>
+        <Meals/>
+      </CartSummaryProvider>
     </Fragment>
   );
 }
