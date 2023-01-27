@@ -3,12 +3,21 @@
     font: inherit;
     font-weight: inherit;
     border: none;
-    background-color: #8a2b06;
-    color: white;
-    padding: 0px 39px;
+    padding: 5px 39px;
     display: flex;
     justify-content: space-around;
     align-items: center;
     border-radius: 25px;
     font-weight: bold;
+}
+
+.light {
+    background-color: #fff;
+    color: #8a2b06;
+    border: 1px solid #8a2b06;
+} 
+
+.filled {
+    background-color: #8a2b06;
+    color: white;
 }
