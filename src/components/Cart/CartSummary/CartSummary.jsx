@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import CartSummaryContext from '../../Providers/cart-summary-context';
 import Button from '../../UI/Button/Button';
 import Modal from '../../UI/Modal/Modal';
-import CartSummaryList from './CartSummaryList';
+import CartList from './CartList';
 import styles from './CartSummary.module.css';
 
 const CartSummary = () => {
@@ -10,7 +10,7 @@ const CartSummary = () => {
 
   return (
     <Modal visible={cartSummaryCtx.isVisible} onClose={cartSummaryCtx.close}>
-      <CartSummaryList />
+      <CartList />
       <div className={styles['total-container']}>
         <span>Total amount</span>
         <span className={styles['total-amount']}>${cartSummaryCtx.order.total}</span>
