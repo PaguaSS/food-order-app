@@ -16,11 +16,11 @@ const orderReducer = (state, action) => {
     if (action.type === "ADD_ITEM") {
         let newMeals = state.meals;
 
-        if (state.meals.length === 0) {
-            newMeals = [...newMeals];
+        if (action.meal) {
+            newMeals = [...newMeals, action.meal];
         }
 
-        return {meals: [], total: 0};
+        return {meals: newMeals, total: getOrderTotal(newMeals)};
     }
 
     return {meals: [], total: 0};
@@ -42,10 +42,10 @@ export const CartSummaryProvider = props => {
 
     const onShowHandler = () => setVisible(true);
 
-    const onAddMeals = (item) => {
+    const onAddMeals = (mealItem) => {
         dispatchOrder({
             type: "ADD_ITEM",
-            meals: [item]
+            meal: mealItem
         });
     };
 
