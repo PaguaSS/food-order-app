@@ -15,7 +15,8 @@ const MealItemForm = (props) => {
     const amountValue = amount;
     if (parseInt(amountValue) > 0) {
       const meal = {...props.meal, qty: amountValue};
-      cartSummaryCtx.addMeals(meal);
+      cartSummaryCtx.addMeal(meal);
+      setAmount("0");
     }
   };
 

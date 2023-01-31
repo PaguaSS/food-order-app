@@ -3,7 +3,7 @@ import CartButton from './CartButton';
 import styles from './Header.module.css';
 import mealsImg from '../../../assets/img/meals.jpg';
 
-const Header = props => {
+const Header = () => {
 
     return (
         <Fragment>

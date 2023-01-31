@@ -1,38 +1,18 @@
 import React, { useState, useReducer } from 'react';
+import orderReducer from '../../Reducers/OrderReducer';
 
 const CartSummaryContext = React.createContext({
     isVisible: false,
     order: {
         meals: [],
-        total: 0.00
+        total: 0
     },
     close: () => {},
     show: () => {},
-    addMeals: () => {}
+    addMeal: () => {},
+    updateMeal: () => {},
+    removeMeal: () => {}
 });
-
-const orderReducer = (state, action) => {
-
-    if (action.type === "ADD_ITEM") {
-        let newMeals = state.meals;
-
-        if (action.meal) {
-            newMeals = [...newMeals, action.meal];
-        }
-
-        return {meals: newMeals, total: getOrderTotal(newMeals)};
-    }
-
-    return {meals: [], total: 0};
-};
-
-const getOrderTotal = (selectedMeals) => {
-    if (selectedMeals && selectedMeals.length > 0) {
-        return selectedMeals.reduce((prevTotal, orderItem) => prevTotal + (orderItem.price * orderItem.qty), 0);
-    } 
-
-    return 0;
-};
 
 export const CartSummaryProvider = props => {
     const [visible, setVisible] = useState(props.visible ?? false);
@@ -42,9 +22,23 @@ export const CartSummaryProvider = props => {
 
     const onShowHandler = () => setVisible(true);
 
-    const onAddMeals = (mealItem) => {
+    const onAddMeal = (mealItem) => {
         dispatchOrder({
             type: "ADD_ITEM",
+            meal: mealItem
+        });
+    };
+
+    const onRemoveMeal = (mealItem) => {
+        dispatchOrder({
+            type: "REMOVE_ITEM",
+            meal: mealItem
+        });
+    };
+
+    const onUpdateMeal = (mealItem) => {
+        dispatchOrder({
+            type: "UPDATE_ITEM",
             meal: mealItem
         });
     };
@@ -56,7 +50,9 @@ export const CartSummaryProvider = props => {
                 order: {meals: orderState.meals, total: orderState.total}, 
                 close: onCloseHandler, 
                 show: onShowHandler, 
-                addMeals: onAddMeals
+                addMeal: onAddMeal,
+                updateMeal: onUpdateMeal,
+                removeMeal: onRemoveMeal
             }}
             >
             {props.children}
