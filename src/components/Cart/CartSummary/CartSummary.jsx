@@ -17,7 +17,7 @@ const CartSummary = () => {
       </div>
       <div className={styles.footer}>
         <Button btnStyle="light" onClick={() => { cartSummaryCtx.close() }}>Close</Button>
-        <Button>Order</Button>
+        {cartSummaryCtx.order.mealsCounter > 0 && <Button className={styles['order-button']}>Order</Button>}
       </div>
     </Modal>
   );

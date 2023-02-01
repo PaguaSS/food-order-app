@@ -8,9 +8,13 @@ const CartButton = () => {
   const modalCtx = useContext(ModalContext);
   const cartSummaryContx = useContext(CartSummaryContext);
   const [onItemAddedClass, setOnItemAddedClass] = useState('');
-  const counter = cartSummaryContx.order.mealsCounter;
+  const {mealsCounter: counter} = cartSummaryContx.order;
 
   useEffect(() => {
+    if (counter === 0) {
+      return;
+    }
+
     setOnItemAddedClass('');
 
     return () => {
