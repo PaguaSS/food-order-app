@@ -5,7 +5,8 @@ const CartSummaryContext = React.createContext({
     isVisible: false,
     order: {
         meals: [],
-        total: 0
+        total: 0,
+        mealsCounter: 0
     },
     close: () => {},
     show: () => {},
@@ -16,7 +17,11 @@ const CartSummaryContext = React.createContext({
 
 export const CartSummaryProvider = props => {
     const [visible, setVisible] = useState(props.visible ?? false);
-    const [orderState, dispatchOrder] = useReducer(orderReducer, {type: null, meals: [], total: 0});
+    const [orderState, dispatchOrder] = useReducer(orderReducer, {
+        meals: [],
+        total: 0,
+        mealsCounter: 0
+    });
 
     const onCloseHandler = () => setVisible(false);
 
@@ -47,7 +52,7 @@ export const CartSummaryProvider = props => {
         <CartSummaryContext.Provider 
             value={{
                 isVisible: visible, 
-                order: {meals: orderState.meals, total: orderState.total}, 
+                order: orderState, 
                 close: onCloseHandler, 
                 show: onShowHandler, 
                 addMeal: onAddMeal,

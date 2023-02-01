@@ -24,6 +24,13 @@ const CartingService = {
         } 
     
         return 0;
+    },
+    getItemsNumber: (selectedMeals) => {
+        if (selectedMeals && selectedMeals.length > 0) {
+            return selectedMeals.reduce((prevTotal, orderItem) => prevTotal + parseInt(orderItem.qty), 0);
+        } 
+    
+        return 0;
     }
 };
 

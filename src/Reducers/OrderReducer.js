@@ -15,20 +15,32 @@ const orderReducer = (state, action) => {
                 });
             }
 
-            return {meals: existingMeals, total: CartingService.getOrderTotal(existingMeals)};
+            return {
+                meals: existingMeals, 
+                total: CartingService.getOrderTotal(existingMeals), 
+                mealsCounter: CartingService.getItemsNumber(existingMeals)
+            };
         } else if (action.type === "UPDATE_ITEM") { 
             existingMeals = existingMeals.map(mealItem => {
                 return (mealItem.id === action.meal.id) ? action.meal : mealItem; 
             });
 
-            return {meals: existingMeals, total: CartingService.getOrderTotal(existingMeals)};
+            return {
+                meals: existingMeals, 
+                total: CartingService.getOrderTotal(existingMeals), 
+                mealsCounter: CartingService.getItemsNumber(existingMeals)
+            };
         } else if (action.type === "REMOVE_ITEM") {
             const cleanedMeals = existingMeals.filter(mealItem => mealItem.id !== action.meal.id);
-            return {meals: cleanedMeals, total: CartingService.getOrderTotal(cleanedMeals)};
+            return {
+                meals: cleanedMeals, 
+                total: CartingService.getOrderTotal(cleanedMeals), 
+                mealsCounter: CartingService.getItemsNumber(cleanedMeals)
+            };
         }
     }
 
-    return {meals: [], total: 0};
+    return {meals: [], total: 0, mealsCounter: 0};
 };
 
 export default orderReducer;
