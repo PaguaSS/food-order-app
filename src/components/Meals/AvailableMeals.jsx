@@ -1,45 +1,40 @@
+import { useEffect, useState } from "react";
+import axios from "axios";
 import styles from './AvailableMeals.module.css';
 import Card from '../UI/Card/Card';
+import Spinner from "../UI/Spinner/Spinner";
 import AvailableMealsItem from './AvailableMealsItem';
 
-const DUMMY_MEALS = [
-    {
-        id: 'm1',
-        name: 'Sushi',
-        description: 'Finest fish and veggies',
-        price: 22.99,
-    },
-    {
-        id: 'm2',
-        name: 'Schnitzel',
-        description: 'A german specialty!',
-        price: 16.5,
-    },
-    {
-        id: 'm3',
-        name: 'Barbecue Burger',
-        description: 'American, raw, meaty',
-        price: 12.99,
-    },
-    {
-        id: 'm4',
-        name: 'Green Bowl',
-        description: 'Healthy...and green...',
-        price: 18.99,
-    },
-];
+const mealsURL = "https://reactcourse-dcdec-default-rtdb.firebaseio.com/meals.json";
 
 const AvailableMeals = () => {
-    const list = DUMMY_MEALS.map(meal => {
+    const [meals, setMeals] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
+
+    useEffect(() => {
+        setIsLoading(true);
+        axios.get(mealsURL).then((response) => {
+            const mealsList = response.data.filter(meal => {
+                return meal && 'name' in meal && 'description' in meal
+            });
+            setMeals(mealsList);
+            setIsLoading(false);
+        });
+    }, []);
+
+    const list = meals.map(meal => {
         return <AvailableMealsItem key={meal.id} meal={meal}/>
     });
 
     return (
         <section className={styles.meals}>
             <Card>
-                <ul>
-                    {list}
-                </ul>
+                {isLoading && <Spinner />}
+                {!isLoading && 
+                    <ul>
+                        {list}
+                    </ul>
+                }
             </Card>
         </section>
     );

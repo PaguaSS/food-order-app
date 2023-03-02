@@ -1,24 +1,37 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
+import Checkout from '../../forms/Checkout';
+import CartSummaryContent from './CartSummaryContent';
 import CartSummaryContext from '../../Providers/cart-summary-context';
-import Button from '../../UI/Button/Button';
 import Modal from '../../UI/Modal/Modal';
-import CartList from './CartList';
-import styles from './CartSummary.module.css';
 
 const CartSummary = () => {
+  let modalContent = null;
   const cartSummaryCtx = useContext(CartSummaryContext);
+  const [checkoutFormVisible, setCheckoutFormVisible] = useState(false);
+
+  const onCloseHandler = () => {
+    cartSummaryCtx.close();
+    setCheckoutFormVisible(false);
+  };
+
+  const displayCheckoutFormHandler = () => {
+    setCheckoutFormVisible(true);
+  };
+
+  if (checkoutFormVisible) {
+    modalContent = <Checkout />;
+  } else {
+    modalContent = <CartSummaryContent 
+      total={cartSummaryCtx.order.total}
+      mealsCounter={cartSummaryCtx.order.mealsCounter}
+      onClose={onCloseHandler}
+      onCheckout={displayCheckoutFormHandler}
+    />;
+  } 
 
   return (
-    <Modal visible={cartSummaryCtx.isVisible} onClose={cartSummaryCtx.close}>
-      <CartList />
-      <div className={styles['total-container']}>
-        <span>Total amount</span>
-        <span className={styles['total-amount']}>${cartSummaryCtx.order.total}</span>
-      </div>
-      <div className={styles.footer}>
-        <Button btnStyle="light" onClick={() => { cartSummaryCtx.close() }}>Close</Button>
-        {cartSummaryCtx.order.mealsCounter > 0 && <Button className={styles['order-button']}>Order</Button>}
-      </div>
+    <Modal visible={cartSummaryCtx.isVisible} onClose={onCloseHandler}>
+      {modalContent}
     </Modal>
   );
 };
