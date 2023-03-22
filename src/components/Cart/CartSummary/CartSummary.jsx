@@ -18,8 +18,12 @@ const CartSummary = () => {
     setCheckoutFormVisible(true);
   };
 
+  const onSaveCart = (event) => {
+    event.preventDefault();
+  };
+
   if (checkoutFormVisible) {
-    modalContent = <Checkout />;
+    modalContent = <Checkout onSave={onSaveCart}/>;
   } else {
     modalContent = <CartSummaryContent 
       total={cartSummaryCtx.order.total}
