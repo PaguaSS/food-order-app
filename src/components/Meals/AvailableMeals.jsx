@@ -5,19 +5,21 @@ import Card from '../UI/Card/Card';
 import Spinner from "../UI/Spinner/Spinner";
 import AvailableMealsItem from './AvailableMealsItem';
 
-const mealsURL = "https://reactcourse-dcdec-default-rtdb.firebaseio.com/meals.json";
-
 const AvailableMeals = () => {
     const [meals, setMeals] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         setIsLoading(true);
-        axios.get(mealsURL).then((response) => {
+        axios.get(`${process.env.REACT_APP_BASE_API_URL}/${process.env.REACT_APP_API_MEALS}`)
+        .then((response) => {
             const mealsList = response.data.filter(meal => {
                 return meal && 'name' in meal && 'description' in meal
             });
             setMeals(mealsList);
+            setIsLoading(false);
+        })
+        .catch((error) => {
             setIsLoading(false);
         });
     }, []);
@@ -30,6 +32,7 @@ const AvailableMeals = () => {
         <section className={styles.meals}>
             <Card>
                 {isLoading && <Spinner />}
+                {!isLoading && list.length === 0 && <p>Something went wrong, try again later.</p>}
                 {!isLoading && 
                     <ul>
                         {list}

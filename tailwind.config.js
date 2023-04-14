@@ -3,20 +3,25 @@ module.exports = {
   content: [
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
-  theme: {
-    extend: {},
-    colors: {
-      'primary' : '#383838',
-      'secondary': {
-        'main' : '#8a2b06',
-        'darker' : '#4d1601',
-        'lighter' : '#b94517'
+  daisyui: {
+    themes: [
+      {
+        mytheme: {
+          "primary": "#8a2b06",
+          "secondary": "#4d1601",
+          "accent": "#b94517",
+          "neutral": "#8a2b06",
+          "base-100": "#ffffff",
+          "info": "#93E7FB",
+          "success": "#81CFD1",
+          "warning": "#EFD7BB",
+          "error": "#E58B8B",
+        },
       },
-      'white': '#ffffff',
-      'gray' : '#bbbbbb'
-    }
+    ],
   },
   plugins: [
     require('@tailwindcss/forms'),
+    require('daisyui')
   ],
 }

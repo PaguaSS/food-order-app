@@ -64,10 +64,10 @@ const Checkout = (props) => {
           <div className="bg-gray-50 px-4 py-3 text-right sm:px-6">
             <button
               type="submit"
-              className="inline-flex justify-center rounded-3xl bg-secondary-main py-1 px-5 text-base font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500"
+              className="btn w-48 rounded-full"
               onClick={props.onSave}
             >
-              Save
+              Finish order
             </button>
           </div>
         </div>
