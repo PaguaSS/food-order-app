@@ -14,13 +14,13 @@ const CartButton = () => {
     if (counter === 0) {
       return;
     }
-
-    setOnItemAddedClass('');
+    
+    setTimeout(() => {
+      setOnItemAddedClass(styles.bump);
+    }, 50);
 
     return () => {
-      setTimeout(() => {
-        setOnItemAddedClass(styles.bump);
-      }, 50);
+      setOnItemAddedClass('');
     };
   }, [counter]);
 

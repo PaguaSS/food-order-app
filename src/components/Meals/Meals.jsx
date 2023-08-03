@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment, memo } from "react";
 import MealsSummary from "./MealsSummary";
 import AvailableMeals from "./AvailableMeals";
 import CartSummary from "../Cart/CartSummary/CartSummary";
@@ -15,4 +15,4 @@ const Meals = () => {
     );
 };
 
-export default Meals;
+export default memo(Meals);

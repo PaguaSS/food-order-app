@@ -1,8 +1,9 @@
 import styles from './Spinner.module.css';
 
-const Spinner = () => {
+const Spinner = props => {
+  const additionalClasses = props.className ?? '';
   return (
-    <div className={styles.container}> 
+    <div className={`${styles.container} ${additionalClasses}`}> 
       <div className={styles.spinner}></div>
     </div>
   );
